@@ -145,7 +145,7 @@ def find_character(furture_action):
         find = input("Type the number corresponding to your action\n").strip()
         if find == "1":
             name = input("Enter the name of the character you want to find\n").strip().lower()
-            type_print(f"\nCharacters with '{name}' in thier name:\n")
+            type_print(f"\nCharacters with '{name}' in their name:\n")
             for character in characters:
                 if name in character["Name"].lower():
                     print(f"{character["Name"]}")
