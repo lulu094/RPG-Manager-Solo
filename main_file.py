@@ -1,4 +1,4 @@
-# LD, LV, & TE First gorup Project
+"""# LD, LV, & TE First gorup Project
 import random
 import time
 import os
@@ -340,4 +340,4 @@ def edit_character():
             else:
                 print("Could not find the character you typed in. Check your spelling and punctuation.")
                 continue
-menu()
+menu()"""

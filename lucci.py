@@ -101,28 +101,24 @@ def create_character():
                 # break
 
 def level_up_loop(character):
-    """
-    Checks if the character has enough XP to level up.
-    Rogue needs 15 XP per level.
-    Cleric needs 20 XP per level.
-    """
-    if character['class'] == 'Rogue':
-        xp_needed = character['level'] * 15
-    else:
-        xp_needed = character['level'] * 20
+    while True:
+        if character['class'] == 'Rogue':
+            xp_needed = character['level'] * 15
+        else:
+            xp_needed = character['level'] * 20
 
-    if character['xp'] >= xp_needed:
-        character['xp'] -= xp_needed
-        character['level'] += 1
-        character['strength'] += 1
+        if character['xp'] >= xp_needed:
+            character['xp'] -= xp_needed
+            character['level'] += 1
+            character['strength'] += 1
 
-    if character['class'] == 'Cleric' and character['level'] % 5 == 0:
-        character['spell_slots'] += 1
-        print("You gained an extra spell slot!")
+            print(f"{character['name']} leveled up to level {character['level']}!")
 
-        print(f"{character['name']} leveled up to level {character['level']}!")
-    else:
-         return
+            if character['class'] == 'Cleric' and character['level'] % 5 == 0:
+                character['spell_slots'] += 1
+                print("You gained an extra spell slot!")
+        else:
+            break
 # TENGO QUE LLAMAR A LAS FUNCIONES EN UN MAIN LOOP Y EN EL OTRO PARA QUE CORRAN
 def run_game():
     character = None
