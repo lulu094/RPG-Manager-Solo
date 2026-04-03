@@ -1,1 +1,1 @@
-chara["Inventory"]
+main

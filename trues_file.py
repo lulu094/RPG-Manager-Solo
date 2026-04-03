@@ -78,7 +78,7 @@ def create_character():
     #Finish character creation
     characters.append(character)
     slow_print(f"Character created:\nName: {character['Name']}\n Class: {character['Class']}\n Stats:\n Strength: {character['Stats']['Strength']}\n Health: {character['Stats']['Health']}\n Wisdom: {character['Stats']['Wisdom']}\n Dexterity: {character['Stats']['Dexterity']}\n Intelligence: {character['Stats']['Intelligence']}\n XP: {character['XP']}\n Level: {character['Level']}\n Weapon: {character['Weapon']}")
-def main():
+"""def main():
     #Main program loop
     while True:
         #Run Character Creation
@@ -87,6 +87,6 @@ def main():
         another = input("Do you want to create another character? (yes/no): ")
         if another.lower() != 'yes':
             break
-main()
+main()"""
 
 

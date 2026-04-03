@@ -138,7 +138,8 @@ def edit_character():
             else:
                 print("Invalid input. Please try again")
                 continue
-    
+
+# ETENDER COMO LLAMA A MAIN PORQUE NO LO VEO Y TENGO QUE BLOQUEAR ESA ACCION PARA PODER LLAMARLO todo A MAIN
     def check_valid_num(num):
         if num.isdigit() == True:
             if int(num) % 1 == 0:

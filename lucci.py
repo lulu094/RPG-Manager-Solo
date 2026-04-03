@@ -124,7 +124,7 @@ def level_up_loop(character):
     else:
          return
 # TENGO QUE LLAMAR A LAS FUNCIONES EN UN MAIN LOOP Y EN EL OTRO PARA QUE CORRAN
-def run_game():
+"""def run_game():
     character = None
 
     while True:
@@ -158,6 +158,6 @@ def run_game():
 
 
 run_game()
-
+"""
 
 
