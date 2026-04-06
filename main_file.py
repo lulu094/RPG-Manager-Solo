@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 # LD, LV, & TE First gorup Project
-=======
 # LV, TE, LD 1st RPG
 
->>>>>>> 31bcbb77e87a1d3cf111d980fdc383ca383cf190
 import random
 import time
 import os
@@ -263,12 +260,6 @@ Skills: {list(chara['Skills'])}
             if mode == "ADDING":
                 chara["Inventory"].add(item)
             else:
-<<<<<<< HEAD
                 print("Could not find the character you typed in. Check your spelling and punctuation.")
                 continue
-=======
-                chara["Inventory"].discard(item)
-
-
->>>>>>> 31bcbb77e87a1d3cf111d980fdc383ca383cf190
 menu()
