@@ -4,7 +4,7 @@
 import random
 import time
 import os
-
+from dashboard import Dashboard
 
 # GLOBAL STYLE REPLACED WITH CLASS WRAPPER 
 class RPG:
@@ -13,27 +13,24 @@ class RPG:
         self.classes = {
             1: {
                 "Name": "Fighter",
-                "Weapons": ("Greatsword", "Greataxe", "Maul"),  # TUPLE
+                "Weapons": ("Greatsword", "Greataxe", "Maul"),
                 "Stats": {"Strength": 30, "Health": 20, "Wisdom": 10}
             },
             2: {
                 "Name": "Rogue",
-                "Weapons": ("Daggers", "Blowgun", "Knives"),  # TUPLE
+                "Weapons": ("Daggers", "Blowgun", "Knives"),
                 "Stats": {"Strength": 20, "Health": 20, "Wisdom": 20}
             },
             3: {
                 "Name": "Cleric",
-                "Weapons": ("Mace", "Warhammer", "Morning Star"),  # TUPLE
+                "Weapons": ("Mace", "Warhammer", "Morning Star"),
                 "Stats": {"Strength": 10, "Health": 30, "Wisdom": 20}
             }
         }
 
         self.characters = []
-
-        # SET 
         self.skill_pool = {"Slash", "Block", "Heal", "Stealth"}
 
-    # ORIGINAL STYLE FUNCTION 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -42,7 +39,6 @@ class RPG:
             print(char, end="", flush=True)
             time.sleep(delay)
 
-    # CLOSURE FUNCTION 
     def xp_needed_factory(self, class_name):
         def xp_needed(level):
             if class_name in ["Fighter", "Rogue"]:
@@ -58,9 +54,10 @@ class RPG:
             print("1. View Character")
             print("2. Create Character")
             print("3. Edit Character")
-            print("4. Exit")
+            print("4. Dashboard 📊")  # ✅ ADDED
+            print("5. Exit")         # ✅ ADDED
 
-            menu_option = input("Select an option (1-4): ")
+            menu_option = input("Select an option (1-5): ")
 
             if menu_option == "1":
                 self.view_character()
@@ -68,11 +65,44 @@ class RPG:
                 self.create_character()
             elif menu_option == "3":
                 self.edit_character()
+
+            # ✅ ADDED DASHBOARD CONNECTION
             elif menu_option == "4":
+                self.open_dashboard()
+
+            elif menu_option == "5":
                 self.type_print("Goodbye adventurer!\n")
                 break
+
             else:
                 print("Invalid option.")
+
+    # =========================
+    # ✅ NEW DASHBOARD PAGE (ADDED ONLY)
+    # =========================
+    def open_dashboard(self):
+        dashboard = Dashboard(self.characters)
+
+        while True:
+            print("\n=== DASHBOARD ===")
+            print("1. Overview")
+            print("2. Class Distribution")
+            print("3. Visual Menu")
+            print("4. Exit Dashboard")
+
+            choice = input("> ")
+
+            if choice == "1":
+                dashboard.show_dashboard()
+
+            elif choice == "2":
+                dashboard.analyzer.class_distribution()
+
+            elif choice == "3":
+                dashboard.visual_menu()
+
+            elif choice == "4":
+                break
 
     # CREATE CHARACTER 
     def create_character(self):
@@ -102,19 +132,17 @@ class RPG:
 
         base = self.classes[c_class]
 
-        # SET USAGE
         character = {
             "Name": input("Name: ").title().strip(),
             "Class": base["Name"],
             "Weapon": None,
-            "Inventory": set(),   # SET
-            "Skills": set(),      # SET
+            "Inventory": set(),
+            "Skills": set(),
             "XP": 0,
             "Level": 1,
             "Stats": base["Stats"].copy()
         }
 
-        # random extra stats (same style as yours)
         character["Stats"]["Dexterity"] = random.randint(10, 30)
         character["Stats"]["Intelligence"] = random.randint(10, 30)
 
@@ -129,7 +157,6 @@ class RPG:
             print("Invalid weapon.")
             return
 
-        # SET OPERATIONS (RUBRIC)
         character["Skills"].update(random.sample(list(self.skill_pool), 2))
 
         self.characters.append(character)
@@ -138,7 +165,6 @@ class RPG:
 
         another_character()
 
-    # FIND CHARACTER
     def find_character(self, future_action):
 
         while True:
@@ -164,7 +190,6 @@ class RPG:
             else:
                 print("Invalid input.")
 
-    # VIEW CHARACTER 
     def view_character(self):
 
         if not self.characters:
@@ -190,7 +215,6 @@ Inventory: {list(chara['Inventory'])}
 Skills: {list(chara['Skills'])}
 """)
 
-    # LEVEL SYSTEM 
     def level_up(self, character):
 
         xp_func = self.xp_needed_factory(character["Class"])
@@ -203,7 +227,6 @@ Skills: {list(chara['Skills'])}
             character["Stats"]["Health"] += 1
             print(f"{character['Name']} leveled up!")
 
-    # EDIT CHARACTER 
     def edit_character(self):
 
         results = self.find_character("editing")
@@ -214,7 +237,6 @@ Skills: {list(chara['Skills'])}
 
         chara = results[0]
 
-        # INNER FUNCTION (RUBRIC)
         def adding_removing(item_type):
             while True:
                 ans = input(f"Adding or removing {item_type}? ").strip().upper()
@@ -260,6 +282,9 @@ Skills: {list(chara['Skills'])}
             if mode == "ADDING":
                 chara["Inventory"].add(item)
             else:
-                print("Could not find the character you typed in. Check your spelling and punctuation.")
-                continue
-menu()
+                if item in chara["Inventory"]:
+                    chara["Inventory"].remove(item)
+                else:
+                    print("Item not found in inventory.")
+game = RPG()
+game.menu()
