@@ -6,7 +6,7 @@ import time
 import os
 from dashboard import Dashboard
 
-# GLOBAL STYLE REPLACED WITH CLASS WRAPPER 
+# CLASS WRAPPER 
 class RPG:
 
     def __init__(self):
@@ -54,8 +54,8 @@ class RPG:
             print("1. View Character")
             print("2. Create Character")
             print("3. Edit Character")
-            print("4. Dashboard 📊")  # ✅ ADDED
-            print("5. Exit")         # ✅ ADDED
+            print("4. Dashboard ") 
+            print("5. Exit")         
 
             menu_option = input("Select an option (1-5): ")
 
@@ -66,7 +66,7 @@ class RPG:
             elif menu_option == "3":
                 self.edit_character()
 
-            # ✅ ADDED DASHBOARD CONNECTION
+            #ADDED DASHBOARD CONNECTION
             elif menu_option == "4":
                 self.open_dashboard()
 
@@ -77,9 +77,9 @@ class RPG:
             else:
                 print("Invalid option.")
 
-    # =========================
-    # ✅ NEW DASHBOARD PAGE (ADDED ONLY)
-    # =========================
+   
+    #  NEW DASHBOARD PAGE 
+  
     def open_dashboard(self):
         dashboard = Dashboard(self.characters)
 
